@@ -88,6 +88,7 @@
     <Compile Include="Domain\token.cs" />
     <Compile Include="Domain\total.cs" />
     <Compile Include="Domain\userCodeResult.cs" />
+    <Compile Include="Domain\webhookEvent.cs" />
     <Compile Include="Enum\BenefitsName.cs" />
     <Compile Include="Enum\CancelamentCode.cs" />
     <Compile Include="Enum\BenefitsTarget.cs" />
