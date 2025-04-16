@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\additionalFees.cs" />
+    <Compile Include="Domain\addressMerchant.cs" />
     <Compile Include="Domain\benefit.cs" />
     <Compile Include="Domain\address.cs" />
     <Compile Include="Domain\customer.cs" />
@@ -73,6 +74,8 @@
     <Compile Include="Domain\indoor.cs" />
     <Compile Include="Domain\item.cs" />
     <Compile Include="Domain\merchant.cs" />
+    <Compile Include="Domain\operationMerchant.cs" />
+    <Compile Include="Domain\orderMerchant.cs" />
     <Compile Include="Domain\order.cs" />
     <Compile Include="Domain\payment.cs" />
     <Compile Include="Domain\picking.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="Domain\Review\review.cs" />
     <Compile Include="Domain\Review\reviews.cs" />
     <Compile Include="Domain\Review\summary.cs" />
+    <Compile Include="Domain\salesChannelMerchant.cs" />
     <Compile Include="Domain\schedule.cs" />
     <Compile Include="Domain\status.cs" />
     <Compile Include="Domain\subItem.cs" />
@@ -95,6 +99,10 @@
     <Compile Include="Enum\AdditionalFeesType.cs" />
     <Compile Include="Enum\DeliveryBy.cs" />
     <Compile Include="Enum\IndoorMode.cs" />
+    <Compile Include="Enum\MerchantOperation.cs" />
+    <Compile Include="Enum\MerchantSalesChannel.cs" />
+    <Compile Include="Enum\MerchantStatus.cs" />
+    <Compile Include="Enum\MerchantType.cs" />
     <Compile Include="Enum\PaymentMethodCurrency.cs" />
     <Compile Include="Enum\PaymentMethodType.cs" />
     <Compile Include="Enum\PaymentType.cs" />

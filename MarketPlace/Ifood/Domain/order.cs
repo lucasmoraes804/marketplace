@@ -23,7 +23,7 @@ namespace Ifood.Domain
         public string displayId { get; set; }
         public bool isTest { get; set; }
         public string salesChannel { get; set; }
-        public merchant merchant { get; set; }
+        public orderMerchant merchant { get; set; }
         public payment payments { get; set; }
         public customer customer { get; set; }
         public List<item> items { get; set; }

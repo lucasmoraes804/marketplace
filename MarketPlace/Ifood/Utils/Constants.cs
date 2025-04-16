@@ -30,6 +30,8 @@ namespace Ifood.Utils
         public const string URL_ORDER_CANCELATION_ACCEPTED = "acceptedCancelation";
         public const string URL_ORDER_CANCELATION_DENIED = "denyCancellation";
         public const string URL_ORDER_READY_TO_PICKUP = "readyToPickup";
+        
+        public const string URL_MERCHANT = "merchants";
 
         public const string URL_CODE = "authentication/v1.0/oauth/userCode";
     }

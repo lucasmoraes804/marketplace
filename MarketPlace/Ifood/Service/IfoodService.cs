@@ -1088,6 +1088,34 @@ namespace Ifood.Service
         }
 
         #endregion
+        
+        #region Lojas
+
+        public GenericResult<merchant> Merchant(string token, string merchant_id)
+        {
+            var result = new GenericResult<merchant>();
+            var url = string.Format("{0}merchant/{1}/{2}/{3}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchant_id);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<merchant>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        #endregion
 
     }
 }
