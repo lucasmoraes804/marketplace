@@ -56,6 +56,7 @@
     <Compile Include="Domain\customer.cs" />
     <Compile Include="Domain\delivery.cs" />
     <Compile Include="Domain\deliveryAddress.cs" />
+    <Compile Include="Domain\dineIn.cs" />
     <Compile Include="Domain\error.cs" />
     <Compile Include="Domain\error_return.cs" />
     <Compile Include="Domain\eventAcknowledgment.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Domain\Finance\SalesBenefits.cs" />
     <Compile Include="Domain\indoor.cs" />
     <Compile Include="Domain\item.cs" />
+    <Compile Include="Domain\liabilities.cs" />
     <Compile Include="Domain\merchant.cs" />
     <Compile Include="Domain\operationMerchant.cs" />
     <Compile Include="Domain\orderMerchant.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Domain\schedule.cs" />
     <Compile Include="Domain\status.cs" />
     <Compile Include="Domain\subItem.cs" />
+    <Compile Include="Domain\subItemCustomization.cs" />
     <Compile Include="Domain\takeout.cs" />
     <Compile Include="Domain\token2.cs" />
     <Compile Include="Domain\token.cs" />

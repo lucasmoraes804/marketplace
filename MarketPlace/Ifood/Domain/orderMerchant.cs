@@ -8,7 +8,13 @@ namespace Ifood.Domain
 {
     public class orderMerchant
     {
+        /// <summary>
+        /// identificador único do merchant (loja)
+        /// </summary>
         public string id { get; set; }
+        /// <summary>
+        /// nome do merchant (loja)
+        /// </summary>
         public string name { get; set; }     
     }
 }
