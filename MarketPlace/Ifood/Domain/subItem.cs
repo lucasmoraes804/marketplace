@@ -38,6 +38,10 @@ namespace Ifood.Domain
         /// </summary>
         public string externalCode { get; set; }
         /// <summary>
+        /// Código de barras (European Article Number)
+        /// </summary>
+        public string ean { get; set; }
+        /// <summary>
         /// Quantidade do item
         /// </summary>
         public decimal quantity { get; set; }
