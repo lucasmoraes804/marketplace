@@ -249,7 +249,7 @@ namespace Ifood.Service
         {
             var result = new GenericResult<order>();
             var url = string.Format("{0}order/{1}/{2}/{3}", _urlBase, Constants.VERSION_1, Constants.URL_ORDER, reference);
-            var client = new RestClientBase(url);
+            var client = new RestClient(url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", string.Format("bearer {0}", token));
             var response = client.Execute<RestObject>(request);
@@ -259,16 +259,12 @@ namespace Ifood.Service
                 result.Result = JsonConvert.DeserializeObject<order>(response.Content);
                 result.Success = true;
                 result.Json = response.Content;
-                result.Request = client.requestResult;
-                result.Response = client.responsetResult;
             }
             else
             {
                 result.Message = response.StatusDescription;
             }
 
-            result.Request = client.requestResult;
-            result.Response = client.responsetResult;
             result.StatusCode = response.StatusCode;
             return result;
         }

@@ -10,7 +10,7 @@ namespace Ifood.Domain
     {
         public subItem()
         {
-            customization = new List<subItemCustomization>();
+            customizations = new List<subItemCustomization>();
         }
         
         /// <summary>
@@ -60,7 +60,7 @@ namespace Ifood.Domain
         /// </summary>
         public decimal price { get; set; }
 
-        public List<subItemCustomization> customization { get; set; }
+        public List<subItemCustomization> customizations { get; set; }
         //public decimal totalPrice { get; set; }
         //public decimal discount { get; set; }
         //public string observations { get; set; }
