@@ -312,7 +312,7 @@ namespace Ifood.Service
             var result = new GenericSimpleResult();
 
             var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_ORDER, reference, Constants.URL_ORDER_CONFIRM);
-            var client = new RestClientBase(url);
+            var client = new RestClient(url);
             var request = new RestRequest(Method.POST);
             request.AddHeader("Authorization", string.Format("Bearer {0}", token));
             request.AddParameter("application/json", data, ParameterType.RequestBody);
@@ -325,14 +325,20 @@ namespace Ifood.Service
             {
                 result.Message = response.StatusDescription;
             }
-            result.Request = client.requestResult;
-            result.Response = client.responsetResult;
+            //result.Request = client.requestResult;
+            //result.Response = client.responsetResult;
             result.StatusCode = response.StatusCode;
 
             return result;
         }
 
-        public GenericSimpleResult OrdersStarPreparation(string token, string reference)
+        /// <summary>
+        /// Informa ao Ifood que o pedido começou a ser preparado.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="reference"></param>
+        /// <returns></returns>
+        public GenericSimpleResult OrdersStartPreparation(string token, string reference)
         {
             var data = new { };
             var result = new GenericSimpleResult();
