@@ -53,6 +53,7 @@
     <Compile Include="Domain\addressMerchant.cs" />
     <Compile Include="Domain\benefit.cs" />
     <Compile Include="Domain\address.cs" />
+    <Compile Include="Domain\cancellationReason.cs" />
     <Compile Include="Domain\customer.cs" />
     <Compile Include="Domain\delivery.cs" />
     <Compile Include="Domain\deliveryAddress.cs" />

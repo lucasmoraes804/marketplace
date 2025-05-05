@@ -452,6 +452,36 @@ namespace Ifood.Service
         #region Cancelamento
 
         /// <summary>
+        /// Obtem as razões de cancelamento disponíveis para o pedido.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="reference"></param>
+        /// <returns></returns>
+        public GenericResult<List<cancellationReason>> CancellationReasons(string token, string reference)
+        {
+            var result = new GenericResult<List<cancellationReason>>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_ORDER, reference, Constants.URL_ORDER_CANCELATION_REASON);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            var response = client.Execute<RestObject>(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<cancellationReason>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        /// <summary>
         /// Solicita o Cancelamento do Pedido
         /// </summary>
         /// <param name="token"></param>

@@ -27,6 +27,7 @@ namespace Ifood.Utils
         public const string URL_ORDER_DISPATCH = "dispatch";
         public const string URL_ORDER_REJECTION = "rejection";
         public const string URL_ORDER_CANCELATION = "requestCancellation";
+        public const string URL_ORDER_CANCELATION_REASON = "cancellationReasons";
         public const string URL_ORDER_CANCELATION_ACCEPTED = "acceptedCancelation";
         public const string URL_ORDER_CANCELATION_DENIED = "denyCancellation";
         public const string URL_ORDER_READY_TO_PICKUP = "readyToPickup";
