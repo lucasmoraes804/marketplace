@@ -357,6 +357,7 @@ namespace Ifood.Service
             {
                 result.Message = response.StatusDescription;
             }
+            result.StatusCode = response.StatusCode;
 
             return result;
         }
