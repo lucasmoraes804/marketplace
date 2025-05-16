@@ -168,8 +168,8 @@ namespace Ifood.Service
         {
             var result = new GenericResult<List<poolingEvent>>();
 
-            var url = string.Format("{0}order/{1}/{2}", _urlBase, Constants.VERSION_1, Constants.URL_EVENT_POOLING+ "?types=COL,CAN");
-            var client = new RestClientBase(url);
+            var url = string.Format("{0}order/{1}/{2}", _urlBase, Constants.VERSION_1, Constants.URL_EVENT_POOLING);
+            var client = new RestClient(url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", string.Format("Bearer {0}", token));
             if (!string.IsNullOrEmpty(merchantid))
@@ -177,7 +177,7 @@ namespace Ifood.Service
             IRestResponse response = client.Execute(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                result.Result = JsonConvert.DeserializeObject<List<poolingEvent>>(response.Content);
+                result.Result = System.Text.Json.JsonSerializer.Deserialize<List<poolingEvent>>(response.Content);
                 result.Success = true;
                 result.Json = response.Content;   
 
@@ -193,8 +193,6 @@ namespace Ifood.Service
             }
 
             result.StatusCode = response.StatusCode;
-            result.Request = client.requestResult;
-            result.Response = client.responsetResult;
 
             return result;
         }

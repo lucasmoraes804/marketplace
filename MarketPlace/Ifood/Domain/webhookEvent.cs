@@ -45,6 +45,6 @@ namespace Ifood.Domain
         /// <summary>
         /// Informações adicionais do evento
         /// </summary>
-        public JsonElement metadata { get; set; }
+        public JsonDocument metadata { get; set; }
     }
 }

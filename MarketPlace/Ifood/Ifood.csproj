@@ -105,6 +105,17 @@
     <Compile Include="Domain\Finance\sales.cs" />
     <Compile Include="Domain\Finance\salesAdjustments.cs" />
     <Compile Include="Domain\Finance\SalesBenefits.cs" />
+    <Compile Include="Domain\handshakeDispute.cs" />
+    <Compile Include="Domain\handshakeDisputeAlternative.cs" />
+    <Compile Include="Domain\handshakeDisputeAlternativeMetadata.cs" />
+    <Compile Include="Domain\handshakeDisputeMetadata.cs" />
+    <Compile Include="Domain\handshakeGarnishItem.cs" />
+    <Compile Include="Domain\handshakeAmount.cs" />
+    <Compile Include="Domain\handshakeItem.cs" />
+    <Compile Include="Domain\handshakeMedia.cs" />
+    <Compile Include="Domain\handshakeSelectedDisputeAlternative.cs" />
+    <Compile Include="Domain\handshakeSelectedDisputeAlternativeMetadata.cs" />
+    <Compile Include="Domain\handshakeSettlement.cs" />
     <Compile Include="Domain\indoor.cs" />
     <Compile Include="Domain\item.cs" />
     <Compile Include="Domain\liabilities.cs" />
