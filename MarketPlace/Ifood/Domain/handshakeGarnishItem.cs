@@ -13,7 +13,7 @@ namespace Ifood.Domain
         /// <summary>
         /// Id do garnish item na integradora
         /// </summary>
-        public string externalCode { get; set; }
+        public string integrationId { get; set; }
         /// <summary>
         /// Quantidade de garnishItems que estão sendo cancelados
         /// </summary>

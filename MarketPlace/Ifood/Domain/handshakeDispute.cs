@@ -13,6 +13,10 @@ namespace Ifood.Domain
         /// </summary>
         public string parentDisputeId { get; set; }
         /// <summary>
+        /// Id da Dispute
+        /// </summary>
+        public string disputeId { get; set; }
+        /// <summary>
         /// Ação que a Dispute representa, qual o objetivo da negociação.<br/> CANCELLATION, PARTIAL_CANCELLATION, PROPOSED_AMOUNT_REFUND, PROPOSED_ADDITIONAL_TIME ou VOID
         /// </summary>
         public string action { get; set; }

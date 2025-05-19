@@ -7,7 +7,7 @@ namespace Ifood.Domain
         /// <summary>
         /// Contém a lista de itens que podem ser cancelados no fluxo de Cancelamento Parcial. Em Disputes com a action PARTIAL_CANCELLATION.
         /// </summary>
-        public List<handshakeItem> item { get; set; }
+        public List<handshakeItem> items { get; set; }
         /// <summary>
         /// Contém a lista de sub itens que podem ser cancelados no fluxo de Cancelamento Parcial. Em Disputes com a action PARTIAL_CANCELLATION.
         /// </summary>

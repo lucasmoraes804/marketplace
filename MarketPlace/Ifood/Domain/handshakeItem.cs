@@ -13,7 +13,7 @@ namespace Ifood.Domain
         /// <summary>
         /// Id do item na integradora
         /// </summary>
-        public string externalCode { get; set; }
+        public string integrationId { get; set; }
         /// <summary>
         /// Quantidade de itens
         /// </summary>
