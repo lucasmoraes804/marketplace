@@ -15,7 +15,7 @@ namespace Ifood.Domain
         /// Por exemplo durante a execução do fluxo de negociação de atraso,
         /// quando o parceiro tem a opção de pedir que o cliente espere por mais X minutos para o pedido ser entregue.
         /// </summary>
-        public List<int> allowedsAdditionalTimeInMinutes { get; set; }
+        public List<short> allowedsAdditionalTimeInMinutes { get; set; }
         /// <summary>
         /// Lista de motivos do atraso na entrega do pedido que a loja deve informar quando quiser negociar um novo tempo de entrega.
         /// </summary>
