@@ -20,6 +20,10 @@ namespace Ifood.Utils
         public const string URL_EVENT_POOLING = "events%3Apolling";
         public const string URL_EVENT_POOLING_2 = "events:polling";
         public const string URL_EVENT_ACNOWLEDGMENT = "events/acknowledgment";
+        public const string URL_DISPUTE = "disputes";
+        public const string URL_DISPUTE_ACCEPT = "accept";
+        public const string URL_DISPUTE_REJECT = "reject";
+        public const string URL_DISPUTE_ALTERNATIVES = "alternatives";
         public const string URL_ORDER = "orders";
         public const string URL_ORDER_INTEGRATION = "statuses/integration";
         public const string URL_ORDER_CONFIRM = "confirm";

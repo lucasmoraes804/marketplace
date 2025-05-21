@@ -586,6 +586,118 @@ namespace Ifood.Service
         }
 
         #endregion
+        
+        #region Plataforma de Negociação
+
+        public GenericResult<handshakeAction> AcceptDispute(string token, string reference)
+        {
+            var result = new GenericResult<handshakeAction>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE, reference, Constants.URL_DISPUTE_ACCEPT);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            var response = client.Execute<RestObject>(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<handshakeAction>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        public GenericResult<handshakeAction> RejectDispute(string token, string reference, string reason)
+        {
+            var data = new { reason };
+            
+            var result = new GenericResult<handshakeAction>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE, reference, Constants.URL_DISPUTE_REJECT);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            var response = client.Execute<RestObject>(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<handshakeAction>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        public GenericResult<handshakeAction> AlternativeDispute(string token, string reference, string alternativeId,
+            string type, string value, string currency = "BRL", int additionalTimeInMinutes = 0, string additionalTimeReason = "")
+        {
+            object data;
+
+            if (type.Equals("BENEFIT") || type.Equals("REFUND"))
+            {
+                data = new
+                {
+                    type,
+                    metadata = new
+                    {
+                        amount = new
+                        {
+                            value,
+                            currency
+                        }
+                    }
+                };
+            }
+            else
+            {
+                data = new
+                {
+                    type,
+                    metadata = new
+                    {
+                        additionalTimeInMinutes,
+                        additionalTimeReason
+                    }
+                };
+            }
+            
+            var result = new GenericResult<handshakeAction>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}/{5}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE,
+                reference, Constants.URL_DISPUTE_ALTERNATIVES, alternativeId);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            var response = client.Execute<RestObject>(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<handshakeAction>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        #endregion
 
         #region Financeiro
 

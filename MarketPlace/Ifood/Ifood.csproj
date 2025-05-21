@@ -105,6 +105,7 @@
     <Compile Include="Domain\Finance\sales.cs" />
     <Compile Include="Domain\Finance\salesAdjustments.cs" />
     <Compile Include="Domain\Finance\SalesBenefits.cs" />
+    <Compile Include="Domain\handshakeAction.cs" />
     <Compile Include="Domain\handshakeDispute.cs" />
     <Compile Include="Domain\handshakeDisputeAlternative.cs" />
     <Compile Include="Domain\handshakeDisputeAlternativeMetadata.cs" />
