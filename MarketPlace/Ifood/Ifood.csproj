@@ -118,6 +118,7 @@
     <Compile Include="Domain\handshakeSelectedDisputeAlternativeMetadata.cs" />
     <Compile Include="Domain\handshakeSettlement.cs" />
     <Compile Include="Domain\indoor.cs" />
+    <Compile Include="Domain\interruption.cs" />
     <Compile Include="Domain\item.cs" />
     <Compile Include="Domain\liabilities.cs" />
     <Compile Include="Domain\merchant.cs" />

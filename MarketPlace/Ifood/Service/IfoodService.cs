@@ -1095,7 +1095,7 @@ namespace Ifood.Service
                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                 var request = new RestRequest(Method.GET);
-                var client = new RestClient($"{Constants.URL_BASE_FINANCE}merchants/{merchantId}/periods");
+                var client = new RestClient($"{Constants.URL_BASE}merchants/{merchantId}/periods");
                 client.Timeout = -1;
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddHeader("Authorization", $"Bearer {token}");
@@ -1254,6 +1254,65 @@ namespace Ifood.Service
                 result.Message = response.StatusDescription;
             }
 
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        #endregion
+        
+        #region Interrupções
+
+        public GenericResult<List<interruption>> Interruptions(string token, string merchantId)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_INTERRUPTION);
+            var result = new GenericResult<List<interruption>>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<interruption>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        public GenericResult<interruption> CreateInterruption(string token, string merchantId, string description, DateTime startDate,
+            DateTime endDate)
+        {
+            var data = new
+            {
+                description,
+                start = startDate.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                end = endDate.ToString("yyyy-MM-ddTHH:mm:ssZ")
+            };
+            
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_INTERRUPTION);
+            var result = new GenericResult<interruption>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                result.Result = JsonConvert.DeserializeObject<interruption>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
             result.StatusCode = response.StatusCode;
             return result;
         }
