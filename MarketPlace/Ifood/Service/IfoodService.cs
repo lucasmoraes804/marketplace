@@ -1317,6 +1317,27 @@ namespace Ifood.Service
             return result;
         }
         
+        public GenericSimpleResult DeleteInterruption(string token, string merchantId, string interruptionId)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}/{5}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_INTERRUPTION, interruptionId);
+            var result = new GenericSimpleResult();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.DELETE);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.NoContent)
+            {
+                result.Success = true;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
         #endregion
 
     }
