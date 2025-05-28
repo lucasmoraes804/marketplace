@@ -25,6 +25,7 @@ namespace Ifood.Utils
         public const string URL_DISPUTE_REJECT = "reject";
         public const string URL_DISPUTE_ALTERNATIVES = "alternatives";
         public const string URL_INTERRUPTION = "interruptions";
+        public const string URL_OPENING_HOUR = "opening-hours";
         public const string URL_ORDER = "orders";
         public const string URL_ORDER_INTEGRATION = "statuses/integration";
         public const string URL_ORDER_CONFIRM = "confirm";

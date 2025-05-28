@@ -1339,6 +1339,33 @@ namespace Ifood.Service
         }
         
         #endregion
+        
+        #region Horário de funcionamento
+        
+        public GenericResult<workingHours> WorkingHours(string token, string merchantId)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_OPENING_HOUR);
+            var result = new GenericResult<workingHours>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<workingHours>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        #endregion
 
     }
 }

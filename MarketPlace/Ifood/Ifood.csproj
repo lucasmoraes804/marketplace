@@ -142,6 +142,8 @@
     <Compile Include="Domain\total.cs" />
     <Compile Include="Domain\userCodeResult.cs" />
     <Compile Include="Domain\webhookEvent.cs" />
+    <Compile Include="Domain\workingHours.cs" />
+    <Compile Include="Domain\workingHoursShift.cs" />
     <Compile Include="Enum\BenefitsName.cs" />
     <Compile Include="Enum\CancelamentCode.cs" />
     <Compile Include="Enum\BenefitsTarget.cs" />
