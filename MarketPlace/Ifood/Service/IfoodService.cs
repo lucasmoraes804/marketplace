@@ -1234,6 +1234,30 @@ namespace Ifood.Service
         
         #region Lojas
 
+        public GenericResult<List<simpleMerchant>> Merchants(string token, int page = 1, int size = 100)
+        {
+            var result = new GenericResult<List<simpleMerchant>>();
+            var url = string.Format("{0}merchant/{1}/{2}?page={3}&size={4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, page, size);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<simpleMerchant>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
         public GenericResult<merchant> Merchant(string token, string merchant_id)
         {
             var result = new GenericResult<merchant>();
@@ -1246,6 +1270,30 @@ namespace Ifood.Service
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 result.Result = JsonConvert.DeserializeObject<merchant>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        public GenericResult<List<merchantStatus>> MerchantStatus(string token, string merchantId)
+        {
+            var result = new GenericResult<List<merchantStatus>>();
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_MERCHANT_STATUS);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<merchantStatus>>(response.Content);
                 result.Success = true;
                 result.Json = response.Content;
             }

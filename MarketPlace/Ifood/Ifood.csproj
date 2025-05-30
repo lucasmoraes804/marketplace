@@ -122,6 +122,10 @@
     <Compile Include="Domain\item.cs" />
     <Compile Include="Domain\liabilities.cs" />
     <Compile Include="Domain\merchant.cs" />
+    <Compile Include="Domain\merchantMessage.cs" />
+    <Compile Include="Domain\merchantReopenable.cs" />
+    <Compile Include="Domain\merchantStatus.cs" />
+    <Compile Include="Domain\merchantValidation.cs" />
     <Compile Include="Domain\operationMerchant.cs" />
     <Compile Include="Domain\orderMerchant.cs" />
     <Compile Include="Domain\order.cs" />
@@ -133,6 +137,7 @@
     <Compile Include="Domain\Review\summary.cs" />
     <Compile Include="Domain\salesChannelMerchant.cs" />
     <Compile Include="Domain\schedule.cs" />
+    <Compile Include="Domain\simpleMerchant.cs" />
     <Compile Include="Domain\status.cs" />
     <Compile Include="Domain\subItem.cs" />
     <Compile Include="Domain\subItemCustomization.cs" />
