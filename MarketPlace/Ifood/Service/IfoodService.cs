@@ -589,12 +589,19 @@ namespace Ifood.Service
         
         #region Plataforma de Negociação
 
-        public GenericResult<handshakeAction> AcceptDispute(string token, string reference)
+        public GenericResult<handshakeAction> AcceptDispute(string token, string reference, string reason = null)
         {
             var result = new GenericResult<handshakeAction>();
             var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE, reference, Constants.URL_DISPUTE_ACCEPT);
             var client = new RestClient(url);
             var request = new RestRequest(Method.POST);
+
+            if (!string.IsNullOrEmpty(reason))
+            {
+                var data = new { reason };
+                request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            }
+            
             request.AddHeader("Authorization", string.Format("bearer {0}", token));
             var response = client.Execute<RestObject>(request);
             
