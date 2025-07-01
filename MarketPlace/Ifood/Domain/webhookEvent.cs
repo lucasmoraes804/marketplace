@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 
 namespace Ifood.Domain
 {
@@ -7,7 +8,7 @@ namespace Ifood.Domain
         /// <summary>
         /// id único do evento
         /// </summary>
-        public Guid id { get; set; }
+        public string id { get; set; }
         
         /// <summary>
         /// 	código do evento
@@ -22,17 +23,17 @@ namespace Ifood.Domain
         /// <summary>
         /// pedido ao qual esse evento está vinculado
         /// </summary>
-        public Guid orderId { get; set; }
+        public string orderId { get; set; }
         
         /// <summary>
         /// id do merchant do pedido
         /// </summary>
-        public Guid merchantId { get; set; }
+        public string merchantId { get; set; }
         
         /// <summary>
         /// data de criação do event
         /// </summary>
-        public DateTime createdAt { get; set; }
+        public string createdAt { get; set; }
         
         /// <summary>
         /// Canal de vendas pelo qual o pedido entra na plataforma (novos canais podem ser adicionados).
@@ -40,5 +41,10 @@ namespace Ifood.Domain
         /// WAITER, PDV, QR_CODE, IFOOD_SHOP_APP, IFOOD_SHOP_SITE, GROCERY_WHITELABEL_SITE
         /// </summary>
         public string salesChannel { get; set; }
+
+        /// <summary>
+        /// Informações adicionais do evento
+        /// </summary>
+        public JsonDocument metadata { get; set; }
     }
 }

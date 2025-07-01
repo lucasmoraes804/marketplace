@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Ifood.Domain
 {
-    public class schedule
+    public class orderMerchant
     {
         /// <summary>
-        /// Início do horário (intervalo) agendado
+        /// identificador único do merchant (loja)
         /// </summary>
-        public string deliveryDateTimeStart { get; set; }
+        public string id { get; set; }
         /// <summary>
-        /// Fim do horário (intervalo) agendado
+        /// nome do merchant (loja)
         /// </summary>
-        public string deliveryDateTimeEnd { get; set; }
+        public string name { get; set; }     
     }
 }

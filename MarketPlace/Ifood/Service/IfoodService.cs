@@ -168,8 +168,8 @@ namespace Ifood.Service
         {
             var result = new GenericResult<List<poolingEvent>>();
 
-            var url = string.Format("{0}order/{1}/{2}", _urlBase, Constants.VERSION_1, Constants.URL_EVENT_POOLING+ "?types=COL,CAN");
-            var client = new RestClientBase(url);
+            var url = string.Format("{0}order/{1}/{2}", _urlBase, Constants.VERSION_1, Constants.URL_EVENT_POOLING);
+            var client = new RestClient(url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", string.Format("Bearer {0}", token));
             if (!string.IsNullOrEmpty(merchantid))
@@ -177,7 +177,7 @@ namespace Ifood.Service
             IRestResponse response = client.Execute(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                result.Result = JsonConvert.DeserializeObject<List<poolingEvent>>(response.Content);
+                result.Result = System.Text.Json.JsonSerializer.Deserialize<List<poolingEvent>>(response.Content);
                 result.Success = true;
                 result.Json = response.Content;   
 
@@ -193,8 +193,6 @@ namespace Ifood.Service
             }
 
             result.StatusCode = response.StatusCode;
-            result.Request = client.requestResult;
-            result.Response = client.responsetResult;
 
             return result;
         }
@@ -249,7 +247,7 @@ namespace Ifood.Service
         {
             var result = new GenericResult<order>();
             var url = string.Format("{0}order/{1}/{2}/{3}", _urlBase, Constants.VERSION_1, Constants.URL_ORDER, reference);
-            var client = new RestClientBase(url);
+            var client = new RestClient(url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", string.Format("bearer {0}", token));
             var response = client.Execute<RestObject>(request);
@@ -259,16 +257,12 @@ namespace Ifood.Service
                 result.Result = JsonConvert.DeserializeObject<order>(response.Content);
                 result.Success = true;
                 result.Json = response.Content;
-                result.Request = client.requestResult;
-                result.Response = client.responsetResult;
             }
             else
             {
                 result.Message = response.StatusDescription;
             }
 
-            result.Request = client.requestResult;
-            result.Response = client.responsetResult;
             result.StatusCode = response.StatusCode;
             return result;
         }
@@ -316,7 +310,7 @@ namespace Ifood.Service
             var result = new GenericSimpleResult();
 
             var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_ORDER, reference, Constants.URL_ORDER_CONFIRM);
-            var client = new RestClientBase(url);
+            var client = new RestClient(url);
             var request = new RestRequest(Method.POST);
             request.AddHeader("Authorization", string.Format("Bearer {0}", token));
             request.AddParameter("application/json", data, ParameterType.RequestBody);
@@ -329,14 +323,20 @@ namespace Ifood.Service
             {
                 result.Message = response.StatusDescription;
             }
-            result.Request = client.requestResult;
-            result.Response = client.responsetResult;
+            //result.Request = client.requestResult;
+            //result.Response = client.responsetResult;
             result.StatusCode = response.StatusCode;
 
             return result;
         }
 
-        public GenericSimpleResult OrdersStarPreparation(string token, string reference)
+        /// <summary>
+        /// Informa ao Ifood que o pedido começou a ser preparado.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="reference"></param>
+        /// <returns></returns>
+        public GenericSimpleResult OrdersStartPreparation(string token, string reference)
         {
             var data = new { };
             var result = new GenericSimpleResult();
@@ -355,6 +355,7 @@ namespace Ifood.Service
             {
                 result.Message = response.StatusDescription;
             }
+            result.StatusCode = response.StatusCode;
 
             return result;
         }
@@ -447,6 +448,36 @@ namespace Ifood.Service
         #endregion
 
         #region Cancelamento
+
+        /// <summary>
+        /// Obtem as razões de cancelamento disponíveis para o pedido.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="reference"></param>
+        /// <returns></returns>
+        public GenericResult<List<cancellationReason>> CancellationReasons(string token, string reference)
+        {
+            var result = new GenericResult<List<cancellationReason>>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_ORDER, reference, Constants.URL_ORDER_CANCELATION_REASON);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            var response = client.Execute<RestObject>(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<cancellationReason>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
 
         /// <summary>
         /// Solicita o Cancelamento do Pedido
@@ -554,6 +585,125 @@ namespace Ifood.Service
             return result;
         }
 
+        #endregion
+        
+        #region Plataforma de Negociação
+
+        public GenericResult<handshakeAction> AcceptDispute(string token, string reference, string reason = null)
+        {
+            var result = new GenericResult<handshakeAction>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE, reference, Constants.URL_DISPUTE_ACCEPT);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+
+            if (!string.IsNullOrEmpty(reason))
+            {
+                var data = new { reason };
+                request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            }
+            
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            var response = client.Execute<RestObject>(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<handshakeAction>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        public GenericResult<handshakeAction> RejectDispute(string token, string reference, string reason)
+        {
+            var data = new { reason };
+            
+            var result = new GenericResult<handshakeAction>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE, reference, Constants.URL_DISPUTE_REJECT);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            var response = client.Execute<RestObject>(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<handshakeAction>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        public GenericResult<handshakeAction> AlternativeDispute(string token, string reference, string alternativeId,
+            string type, string value, string currency = "BRL", int additionalTimeInMinutes = 0, string additionalTimeReason = "")
+        {
+            object data;
+
+            if (type.Equals("BENEFIT") || type.Equals("REFUND"))
+            {
+                data = new
+                {
+                    type,
+                    metadata = new
+                    {
+                        amount = new
+                        {
+                            value,
+                            currency
+                        }
+                    }
+                };
+            }
+            else
+            {
+                data = new
+                {
+                    type,
+                    metadata = new
+                    {
+                        additionalTimeInMinutes,
+                        additionalTimeReason
+                    }
+                };
+            }
+            
+            var result = new GenericResult<handshakeAction>();
+            var url = string.Format("{0}order/{1}/{2}/{3}/{4}/{5}", _urlBase, Constants.VERSION_1, Constants.URL_DISPUTE,
+                reference, Constants.URL_DISPUTE_ALTERNATIVES, alternativeId);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", string.Format("bearer {0}", token));
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            var response = client.Execute<RestObject>(request);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<handshakeAction>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
         #endregion
 
         #region Financeiro
@@ -952,7 +1102,7 @@ namespace Ifood.Service
                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                 var request = new RestRequest(Method.GET);
-                var client = new RestClient($"{Constants.URL_BASE_FINANCE}merchants/{merchantId}/periods");
+                var client = new RestClient($"{Constants.URL_BASE}merchants/{merchantId}/periods");
                 client.Timeout = -1;
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddHeader("Authorization", $"Bearer {token}");
@@ -1087,6 +1237,215 @@ namespace Ifood.Service
             return result;
         }
 
+        #endregion
+        
+        #region Lojas
+
+        public GenericResult<List<simpleMerchant>> Merchants(string token, int page = 1, int size = 100)
+        {
+            var result = new GenericResult<List<simpleMerchant>>();
+            var url = string.Format("{0}merchant/{1}/{2}?page={3}&size={4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, page, size);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<simpleMerchant>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        public GenericResult<merchant> Merchant(string token, string merchant_id)
+        {
+            var result = new GenericResult<merchant>();
+            var url = string.Format("{0}merchant/{1}/{2}/{3}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchant_id);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<merchant>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        public GenericResult<List<merchantStatus>> MerchantStatus(string token, string merchantId)
+        {
+            var result = new GenericResult<List<merchantStatus>>();
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_MERCHANT_STATUS);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<merchantStatus>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        #endregion
+        
+        #region Interrupções
+
+        public GenericResult<List<interruption>> Interruptions(string token, string merchantId)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_INTERRUPTION);
+            var result = new GenericResult<List<interruption>>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<List<interruption>>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        public GenericResult<interruption> CreateInterruption(string token, string merchantId, string description, DateTime startDate,
+            DateTime endDate)
+        {
+            var data = new
+            {
+                description,
+                start = startDate.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                end = endDate.ToString("yyyy-MM-ddTHH:mm:ssZ")
+            };
+            
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_INTERRUPTION);
+            var result = new GenericResult<interruption>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                result.Result = JsonConvert.DeserializeObject<interruption>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        public GenericSimpleResult DeleteInterruption(string token, string merchantId, string interruptionId)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}/{5}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_INTERRUPTION, interruptionId);
+            var result = new GenericSimpleResult();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.DELETE);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.NoContent)
+            {
+                result.Success = true;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
+        #endregion
+        
+        #region Horário de funcionamento
+        
+        public GenericResult<workingHours> WorkingHours(string token, string merchantId)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_OPENING_HOUR);
+            var result = new GenericResult<workingHours>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = JsonConvert.DeserializeObject<workingHours>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+
+        public GenericResult<workingHours> CreateWorkingHours(string token, string merchantId, workingHours data)
+        {
+            var url = string.Format("{0}merchant/{1}/{2}/{3}/{4}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, merchantId, Constants.URL_OPENING_HOUR);
+            var result = new GenericResult<workingHours>();
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.PUT);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                result.Result = JsonConvert.DeserializeObject<workingHours>(response.Content);
+                result.Success = true;
+                result.Json = response.Content;
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+            
+            result.StatusCode = response.StatusCode;
+            return result;
+            
+        }
+        
         #endregion
 
     }

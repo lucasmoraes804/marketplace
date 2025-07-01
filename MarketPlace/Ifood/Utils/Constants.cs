@@ -20,6 +20,12 @@ namespace Ifood.Utils
         public const string URL_EVENT_POOLING = "events%3Apolling";
         public const string URL_EVENT_POOLING_2 = "events:polling";
         public const string URL_EVENT_ACNOWLEDGMENT = "events/acknowledgment";
+        public const string URL_DISPUTE = "disputes";
+        public const string URL_DISPUTE_ACCEPT = "accept";
+        public const string URL_DISPUTE_REJECT = "reject";
+        public const string URL_DISPUTE_ALTERNATIVES = "alternatives";
+        public const string URL_INTERRUPTION = "interruptions";
+        public const string URL_OPENING_HOUR = "opening-hours";
         public const string URL_ORDER = "orders";
         public const string URL_ORDER_INTEGRATION = "statuses/integration";
         public const string URL_ORDER_CONFIRM = "confirm";
@@ -27,9 +33,13 @@ namespace Ifood.Utils
         public const string URL_ORDER_DISPATCH = "dispatch";
         public const string URL_ORDER_REJECTION = "rejection";
         public const string URL_ORDER_CANCELATION = "requestCancellation";
+        public const string URL_ORDER_CANCELATION_REASON = "cancellationReasons";
         public const string URL_ORDER_CANCELATION_ACCEPTED = "acceptedCancelation";
         public const string URL_ORDER_CANCELATION_DENIED = "denyCancellation";
         public const string URL_ORDER_READY_TO_PICKUP = "readyToPickup";
+        
+        public const string URL_MERCHANT = "merchants";
+        public const string URL_MERCHANT_STATUS = "status";
 
         public const string URL_CODE = "authentication/v1.0/oauth/userCode";
     }

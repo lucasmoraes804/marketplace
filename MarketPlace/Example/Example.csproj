@@ -1,278 +1,62 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1328E65C-3A09-48FF-BBAA-9277B57FAEDE}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Example</RootNamespace>
-    <AssemblyName>Example</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MarketPlaceConfig.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <ProjectReference Include="..\Accon\Accon.csproj" />
+    <ProjectReference Include="..\Agilizone\Agilizone.csproj" />
+    <ProjectReference Include="..\Aipedi\Aipedi.csproj" />
+    <ProjectReference Include="..\Aiqfome\Aiqfome.csproj" />
+    <ProjectReference Include="..\Americanas\Americanas.csproj" />
+    <ProjectReference Include="..\AnotaAi\AnotaAi.csproj" />
+    <ProjectReference Include="..\AtivMob\AtivMob.csproj" />
+    <ProjectReference Include="..\B2Food\B2Food.csproj" />
+    <ProjectReference Include="..\BigDim\Bigdim.csproj" />
+    <ProjectReference Include="..\BigFish\BigFish.csproj" />
+    <ProjectReference Include="..\CardapioWeb\CardapioWeb.csproj" />
+    <ProjectReference Include="..\Cinddi\Cinddi.csproj" />
+    <ProjectReference Include="..\CresceVendas\CresceVendas.csproj" />
+    <ProjectReference Include="..\CRMBonus\CRMBonus.csproj" />
+    <ProjectReference Include="..\Deeliv\Deeliv.csproj" />
+    <ProjectReference Include="..\DegustaAi\DegustaAi.csproj" />
+    <ProjectReference Include="..\DeliveryApp\DeliveryApp.csproj" />
+    <ProjectReference Include="..\DeliveryDireto\DeliveryDireto.csproj" />
+    <ProjectReference Include="..\DeliveryVip\DeliveryVip.csproj" />
+    <ProjectReference Include="..\Epadoca\Epadoca.csproj" />
+    <ProjectReference Include="..\EuFalo\EuFalo.csproj" />
+    <ProjectReference Include="..\Fidelizi\Fidelizi.csproj" />
+    <ProjectReference Include="..\FixeCRM\FixeCRM.csproj" />
+    <ProjectReference Include="..\GloriaFood\GloriaFood.csproj" />
+    <ProjectReference Include="..\Goomer\Goomer.csproj" />
+    <ProjectReference Include="..\IDelivery\IDelivery.csproj" />
+    <ProjectReference Include="..\Ifood\Ifood.csproj" />
+    <ProjectReference Include="..\JotaJa\JotaJa.csproj" />
+    <ProjectReference Include="..\Logaroo\Logaroo.csproj" />
+    <ProjectReference Include="..\MarketPlace\MarketPlace.csproj" />
+    <ProjectReference Include="..\MeuCardapioAi\MeuCardapioAi.csproj" />
+    <ProjectReference Include="..\MultiPedido\MultiPedido.csproj" />
+    <ProjectReference Include="..\OnPedido\OnPedido.csproj" />
+    <ProjectReference Include="..\PixCommerce\PixCommerce.csproj" />
+    <ProjectReference Include="..\Plug4Sales\Plug4Sales.csproj" />
+    <ProjectReference Include="..\QueroDelivery\QueroDelivery.csproj" />
+    <ProjectReference Include="..\Rappi\Rappi.csproj" />
+    <ProjectReference Include="..\SelfBuyMe\SelfBuyMe.csproj" />
+    <ProjectReference Include="..\Servit\Servit.csproj" />
+    <ProjectReference Include="..\Simbora\Simbora.csproj" />
+    <ProjectReference Include="..\SuperMenu\SuperMenu.csproj" />
+    <ProjectReference Include="..\Tray\Tray.csproj" />
+    <ProjectReference Include="..\UberEats\UberEats.csproj" />
+    <ProjectReference Include="..\VMarket\VMarket.csproj" />
+    <ProjectReference Include="..\Wedo\Wedo.csproj" />
+    <ProjectReference Include="..\Woocommerce\Woocommerce.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Accon\Accon.csproj">
-      <Project>{77da7553-dd84-43fe-a4c8-c21bc8185a10}</Project>
-      <Name>Accon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agilizone\Agilizone.csproj">
-      <Project>{9944ef9f-edd5-42e0-aa16-f6de3d99b2b8}</Project>
-      <Name>Agilizone</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aipedi\Aipedi.csproj">
-      <Project>{a7822d3b-963c-44f6-80ec-5f8d40d298cc}</Project>
-      <Name>Aipedi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aiqfome\Aiqfome.csproj">
-      <Project>{61d2230a-5888-49ae-89d1-9c65a625d178}</Project>
-      <Name>Aiqfome</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Americanas\Americanas.csproj">
-      <Project>{ec445945-e4db-47e7-a096-51f985013a42}</Project>
-      <Name>Americanas</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AnotaAi\AnotaAi.csproj">
-      <Project>{175d27bf-35ce-45b3-b30f-5242110128d1}</Project>
-      <Name>AnotaAi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AtivMob\AtivMob.csproj">
-      <Project>{61bbfa72-07c8-4af2-9215-dba55a5edd45}</Project>
-      <Name>AtivMob</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\B2Food\B2Food.csproj">
-      <Project>{d791b84b-2181-4076-8655-08f3072f96f6}</Project>
-      <Name>B2Food</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BigDim\Bigdim.csproj">
-      <Project>{6f5c18a0-f29a-4857-b6b6-8b8ada9f0b22}</Project>
-      <Name>Bigdim</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BigFish\BigFish.csproj">
-      <Project>{2779f399-8e5c-4569-a74a-2855baf2b7c5}</Project>
-      <Name>BigFish</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CardapioWeb\CardapioWeb.csproj">
-      <Project>{adfd8890-1d9c-4658-bbba-f0c1f3239410}</Project>
-      <Name>CardapioWeb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cinddi\Cinddi.csproj">
-      <Project>{370a32f6-b2a0-4822-b864-7084d3f18ae1}</Project>
-      <Name>Cinddi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CresceVendas\CresceVendas.csproj">
-      <Project>{2b375576-e31f-4a9d-90f3-83024a2daf3d}</Project>
-      <Name>CresceVendas</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CRMBonus\CRMBonus.csproj">
-      <Project>{90c857a2-55f0-4314-b9fc-a3c9b40add13}</Project>
-      <Name>CRMBonus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Deeliv\Deeliv.csproj">
-      <Project>{9a45d340-8699-4fc2-9264-d5514b6d511d}</Project>
-      <Name>Deeliv</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DegustaAi\DegustaAi.csproj">
-      <Project>{602a6b91-7846-4468-a51e-505b54086a15}</Project>
-      <Name>DegustaAi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DeliveryApp\DeliveryApp.csproj">
-      <Project>{b95f22fb-e688-4a01-946a-5daf2d5c1457}</Project>
-      <Name>DeliveryApp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DeliveryDireto\DeliveryDireto.csproj">
-      <Project>{4051bc94-28ac-41c1-8cb9-e254f822a7cc}</Project>
-      <Name>DeliveryDireto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DeliveryVip\DeliveryVip.csproj">
-      <Project>{0f81178e-1f94-43e0-b34b-3fdcf6ed1e00}</Project>
-      <Name>DeliveryVip</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epadoca\Epadoca.csproj">
-      <Project>{815ac321-6bd3-43c0-be31-0f5564929fff}</Project>
-      <Name>Epadoca</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EuFalo\EuFalo.csproj">
-      <Project>{19ff5cde-dc28-49e6-864b-c405475e125b}</Project>
-      <Name>EuFalo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fidelizi\Fidelizi.csproj">
-      <Project>{5ba3b444-3b22-4580-b882-2a12f0a541a3}</Project>
-      <Name>Fidelizi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FixeCRM\FixeCRM.csproj">
-      <Project>{93ad28ed-99ff-4be3-8d4f-81af5306a9d6}</Project>
-      <Name>FixeCRM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GloriaFood\GloriaFood.csproj">
-      <Project>{572c537e-0dfb-4b13-9b0d-6918d191c4bc}</Project>
-      <Name>GloriaFood</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Goomer\Goomer.csproj">
-      <Project>{a02cadd0-d127-470b-8eb6-d016bc482ae6}</Project>
-      <Name>Goomer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDelivery\IDelivery.csproj">
-      <Project>{c991a94c-63ce-40b2-b3d1-3a61ab0d0080}</Project>
-      <Name>IDelivery</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ifood\Ifood.csproj">
-      <Project>{72ee52a9-3a7a-43a6-b8e6-b8a10b05f05e}</Project>
-      <Name>Ifood</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JotaJa\JotaJa.csproj">
-      <Project>{e50b2095-11b2-4926-bc46-3b0b6bb99899}</Project>
-      <Name>JotaJa</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logaroo\Logaroo.csproj">
-      <Project>{30012c62-cd02-4f82-8fae-8125778f786d}</Project>
-      <Name>Logaroo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MarketPlace\MarketPlace.csproj">
-      <Project>{8c099d07-604b-471c-a810-c7581eb78373}</Project>
-      <Name>MarketPlace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MeuCardapioAi\MeuCardapioAi.csproj">
-      <Project>{494a0d9c-e42d-495b-9881-35e09fc454ba}</Project>
-      <Name>MeuCardapioAi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MultiPedido\MultiPedido.csproj">
-      <Project>{421adbfc-12c4-48c6-aeeb-33a66482fe9a}</Project>
-      <Name>MultiPedido</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OnPedido\OnPedido.csproj">
-      <Project>{f423ea0e-b5c2-4152-ac20-b2de04b4b1aa}</Project>
-      <Name>OnPedido</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PixCommerce\PixCommerce.csproj">
-      <Project>{dacbf174-3fbe-4a18-b22a-15ff999c7807}</Project>
-      <Name>PixCommerce</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plug4Sales\Plug4Sales.csproj">
-      <Project>{1f723dd4-e55e-4245-b76a-473aa83c443f}</Project>
-      <Name>Plug4Sales</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QueroDelivery\QueroDelivery.csproj">
-      <Project>{0bd1a203-8f50-4436-9f29-991a2af9dbe9}</Project>
-      <Name>QueroDelivery</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Rappi\Rappi.csproj">
-      <Project>{c3d17fa9-cc22-4a28-a049-2a7ad8164403}</Project>
-      <Name>Rappi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelfBuyMe\SelfBuyMe.csproj">
-      <Project>{6154bfda-0ae4-4af5-be44-873e142e3704}</Project>
-      <Name>SelfBuyMe</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Servit\Servit.csproj">
-      <Project>{dd7b2f3a-2797-48a2-af86-bde6e490c13d}</Project>
-      <Name>Servit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Simbora\Simbora.csproj">
-      <Project>{56149c04-43d3-4a3b-9ee0-b69f7b0a92c8}</Project>
-      <Name>Simbora</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SuperMenu\SuperMenu.csproj">
-      <Project>{99e71d2d-c46a-475e-aca6-dc7b07e82a65}</Project>
-      <Name>SuperMenu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tray\Tray.csproj">
-      <Project>{b8b6d464-a19b-430a-ae2e-421af220a9a3}</Project>
-      <Name>Tray</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UberEats\UberEats.csproj">
-      <Project>{da7501a5-63e5-497d-b643-cc002c4d98fc}</Project>
-      <Name>UberEats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VMarket\VMarket.csproj">
-      <Project>{cbd8c92b-ad17-414c-b626-d640a7c77326}</Project>
-      <Name>VMarket</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Wedo\Wedo.csproj">
-      <Project>{7cfcd6c5-5e80-406a-a95b-f341d2a378c6}</Project>
-      <Name>Wedo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Woocommerce\Woocommerce.csproj">
-      <Project>{9a7414b8-25c8-4c04-b1e6-3b7e9961c42a}</Project>
-      <Name>Woocommerce</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
