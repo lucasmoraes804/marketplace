@@ -768,7 +768,7 @@ namespace Example
                 return;
             }
 
-            var ifoodService = new Ifood.Service.IfoodService();
+            /*var ifoodService = new Ifood.Service.IfoodService();
             var result = ifoodService.OrdersStarPreparation(_ifoodToken, _ifoodReferenceSelected);
             if (result.Success)
             {
@@ -777,7 +777,7 @@ namespace Example
             else
             {
                 MessageBox.Show(result.Message);
-            }
+            }*/
         }
 
         private void btnIfoodPedidoPronto_Click(object sender, EventArgs e)
