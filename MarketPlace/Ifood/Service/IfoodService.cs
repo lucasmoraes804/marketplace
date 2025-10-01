@@ -1313,6 +1313,36 @@ namespace Ifood.Service
             return result;
         }
         
+        public GenericResult<byte[]> CheckInQrCode(string token, List<string> merchantIds)
+        {
+            var data = new
+            {
+                merchantIds
+            };
+            
+            var result = new GenericResult<byte[]>();
+            var url = string.Format("{0}merchant/{1}/{2}/{3}", _urlBase, Constants.VERSION_1, Constants.URL_MERCHANT, Constants.URL_CHECKIN_QRCODE);
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", $"Bearer {token}");
+            request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.Result = response.RawBytes;
+                result.Success = true;
+                result.Json = Convert.ToBase64String(response.RawBytes);
+            }
+            else
+            {
+                result.Message = response.StatusDescription;
+            }
+
+            result.StatusCode = response.StatusCode;
+            return result;
+        }
+        
         #endregion
         
         #region Interrupções
