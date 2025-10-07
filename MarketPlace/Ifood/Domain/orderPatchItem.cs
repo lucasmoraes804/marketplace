@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Ifood.Domain;
 
 public class orderPatchItem
@@ -6,7 +8,8 @@ public class orderPatchItem
     public string uniqueId { get; set; }
     public string externalCode { get; set; }
     public orderPatchChangeDetail changes { get; set; }
+    public List<orderPatchOption> options { get; set; }
     public decimal unitPrice { get; set; }
-    public fromTo<decimal> optionsPrice { get; set; }
-    public fromTo<decimal> totalPrice { get; set; }
+    public object optionsPrice { get; set; }
+    public object totalPrice { get; set; }
 }
