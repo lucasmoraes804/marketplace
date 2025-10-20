@@ -164,7 +164,7 @@ namespace Ifood.Service
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public GenericResult<List<poolingEvent>> EventPolling(string token, string merchantid)
+        public GenericResult<List<poolingEvent>> EventPolling(string token, List<string> merchantsIds)
         {
             var result = new GenericResult<List<poolingEvent>>();
 
@@ -172,8 +172,7 @@ namespace Ifood.Service
             var client = new RestClient(url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", string.Format("Bearer {0}", token));
-            if (!string.IsNullOrEmpty(merchantid))
-                request.AddHeader("x-polling-merchants", merchantid);
+            request.AddHeader("x-polling-merchants", string.Join(",", merchantsIds));
             IRestResponse response = client.Execute(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
